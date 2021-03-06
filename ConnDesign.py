@@ -65,7 +65,8 @@ class Window(QMainWindow):
         status_info.checkDimensions()
 
     def openFileDialog(self):
-        user_dir = str(Path.cwd()) + '/template'
+        user_dir = str(Path.home())
+        # user_dir = str(Path.cwd()) + '/template'
         fileObj = QFileDialog.getOpenFileName(self, self.app_name, user_dir, filter="XML files (*.xml)")
         self.file_path = fileObj[0]
         if self.file_path != "":
