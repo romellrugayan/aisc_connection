@@ -1,0 +1,18 @@
+<!DOCTYPE RCC>
+<RCC version="1.0">
+    <qresource prefix="icons">
+        <file alias="open.png">icons/open_file.png</file>
+        <file alias="save.png">icons/save_file.png</file>
+        <file alias="saveas.png">icons/save_as.png</file>
+        <file alias="exit.png">icons/exit.png</file>
+        <file alias="project.png">icons/project.png</file>
+        <file alias="mat_specs.png">icons/mat_specs.png</file>
+        <file alias="gusset.png">icons/gusset_type.png</file>
+        <file alias="clip.png">icons/clip_type.png</file>
+        <file alias="endplate.png">icons/endplate_type.png</file>
+        <file alias="loads.png">icons/loads.png</file>
+        <file alias="calculate.png">icons/calculate.png</file>
+        <file alias="excel.png">icons/excel.png</file>
+        <file alias="connection_design.png">icons/conndesign.png</file>
+    </qresource>
+</RCC>
