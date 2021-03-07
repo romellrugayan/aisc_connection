@@ -16,7 +16,6 @@ from utility.viewer import Viewer
 from utility.detailer import Detailer
 from utility.statusinfo import StatusInfo
 from designresult import DesignResult
-from resources import resources
 
 
 class Window(QMainWindow):
@@ -178,8 +177,8 @@ class Window(QMainWindow):
         if dialog.exec_():
             self.mat_specs = dialog.getMaterial()
             self.isMaterialUpdated = True
-        else:
-            QMessageBox.warning(self, self.app_name, "Design parameters not saved!")
+        # else:
+        #     QMessageBox.warning(self, self.app_name, "Design parameters not saved!")
 
     def openShearGussetDialog(self):
         dialog = ShearGussetDialog(self.isGussetUpdated, self.gusset_geometry)
@@ -195,8 +194,8 @@ class Window(QMainWindow):
             if len(self.gusset_geometry) != 0:
                 self.isGussetUpdated = True
             dialog.db.close()
-        else:
-            QMessageBox.warning(self, self.app_name, "Design parameters not saved!")
+        # else:
+        #     QMessageBox.warning(self, self.app_name, "Design parameters not saved!")
 
     def openShearCopeDialog(self):
         dialog = ShearCopeDialog(self.isCopeUpdated, self.cope_geometry)
@@ -212,8 +211,8 @@ class Window(QMainWindow):
             if len(self.cope_geometry) != 0:
                 self.isCopeUpdated = True
             dialog.db.close()
-        else:
-            QMessageBox.warning(self, self.app_name, "Design parameters not saved!")
+        # else:
+        #     QMessageBox.warning(self, self.app_name, "Design parameters not saved!")
 
     def openShearClipDialog(self):
         dialog = ShearClipDialog(self.isClipUpdated, self.clip_geometry)
@@ -245,9 +244,9 @@ class Window(QMainWindow):
             k = dialog.getRows()
             if dialog.validateInput(k):
                 self.load_data = dialog.getLoads(k)
-                QMessageBox.information(self, self.app_name, "Total number of load cases for design : " + str(k))
-        else:
-            QMessageBox.warning(self, self.app_name, "Design loadings not saved!")
+                # QMessageBox.information(self, self.app_name, "Total number of load cases for design : " + str(k))
+        # else:
+        #     QMessageBox.warning(self, self.app_name, "Design loadings not saved!")
 
     @staticmethod
     def maxStressRatio(results):
@@ -266,6 +265,8 @@ class Window(QMainWindow):
             conn_geometry = self.gusset_geometry
         elif self.conn_type == 'ShearCope':
             conn_geometry = self.cope_geometry
+        else:
+            conn_geometry = {}
 
         if len(conn_geometry) != 0 and len(self.load_data) != 0 and len(self.mat_specs) != 0 and len(self.project_desc) != 0:
             # display the input parameters
@@ -278,7 +279,6 @@ class Window(QMainWindow):
             viewer.displayMaterialStrength(self.mat_specs)
 
             # do design calculation
-
             dr = DesignResult(self.mat_specs, self.conn_type, conn_geometry)
             self.calc_result = []
             bolt_shear = []

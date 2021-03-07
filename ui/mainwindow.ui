@@ -230,8 +230,8 @@ padding: 6px;
   </widget>
   <action name="actionOpen">
    <property name="icon">
-    <iconset resource="../resources/resources.qrc">
-     <normaloff>:/icons/open.png</normaloff>:/icons/open.png</iconset>
+    <iconset>
+     <normaloff>../resources/icons/open_file.png</normaloff>../resources/icons/open_file.png</iconset>
    </property>
    <property name="text">
     <string>Open...</string>
@@ -245,8 +245,8 @@ padding: 6px;
   </action>
   <action name="actionSave">
    <property name="icon">
-    <iconset resource="../resources/resources.qrc">
-     <normaloff>:/icons/save.png</normaloff>:/icons/save.png</iconset>
+    <iconset>
+     <normaloff>../resources/icons/save_file.png</normaloff>../resources/icons/save_file.png</iconset>
    </property>
    <property name="text">
     <string>Save</string>
@@ -260,8 +260,8 @@ padding: 6px;
   </action>
   <action name="actionSaveAs">
    <property name="icon">
-    <iconset resource="../resources/resources.qrc">
-     <normaloff>:/icons/saveas.png</normaloff>:/icons/saveas.png</iconset>
+    <iconset>
+     <normaloff>../resources/icons/save_as.png</normaloff>../resources/icons/save_as.png</iconset>
    </property>
    <property name="text">
     <string>Save As...</string>
@@ -272,8 +272,8 @@ padding: 6px;
   </action>
   <action name="actionExit">
    <property name="icon">
-    <iconset resource="../resources/resources.qrc">
-     <normaloff>:/icons/exit.png</normaloff>:/icons/exit.png</iconset>
+    <iconset>
+     <normaloff>../resources/icons/exit.png</normaloff>../resources/icons/exit.png</iconset>
    </property>
    <property name="text">
     <string>Exit</string>
@@ -284,8 +284,8 @@ padding: 6px;
   </action>
   <action name="actionShearGusset">
    <property name="icon">
-    <iconset resource="../resources/resources.qrc">
-     <normaloff>:/icons/gusset.png</normaloff>:/icons/gusset.png</iconset>
+    <iconset>
+     <normaloff>../resources/icons/gusset_type.png</normaloff>../resources/icons/gusset_type.png</iconset>
    </property>
    <property name="text">
     <string>Gusset Plate Type</string>
@@ -299,8 +299,8 @@ padding: 6px;
   </action>
   <action name="actionShearClipAngle">
    <property name="icon">
-    <iconset resource="../resources/resources.qrc">
-     <normaloff>:/icons/clip.png</normaloff>:/icons/clip.png</iconset>
+    <iconset>
+     <normaloff>../resources/icons/clip_type.png</normaloff>../resources/icons/clip_type.png</iconset>
    </property>
    <property name="text">
     <string>Clip Angle Type</string>
@@ -314,8 +314,8 @@ padding: 6px;
   </action>
   <action name="actionShearEndPlate">
    <property name="icon">
-    <iconset resource="../resources/resources.qrc">
-     <normaloff>:/icons/endplate.png</normaloff>:/icons/endplate.png</iconset>
+    <iconset>
+     <normaloff>../resources/icons/endplate_type.png</normaloff>../resources/icons/endplate_type.png</iconset>
    </property>
    <property name="text">
     <string>End Plate Type</string>
@@ -329,8 +329,8 @@ padding: 6px;
   </action>
   <action name="actionLoadings">
    <property name="icon">
-    <iconset resource="../resources/resources.qrc">
-     <normaloff>:/icons/loads.png</normaloff>:/icons/loads.png</iconset>
+    <iconset>
+     <normaloff>../resources/icons/loads.png</normaloff>../resources/icons/loads.png</iconset>
    </property>
    <property name="text">
     <string>Loadings</string>
@@ -344,8 +344,8 @@ padding: 6px;
   </action>
   <action name="actionCalculate">
    <property name="icon">
-    <iconset resource="../resources/resources.qrc">
-     <normaloff>:/icons/calculate.png</normaloff>:/icons/calculate.png</iconset>
+    <iconset>
+     <normaloff>../resources/icons/calculate.png</normaloff>../resources/icons/calculate.png</iconset>
    </property>
    <property name="text">
     <string>Calculate</string>
@@ -359,8 +359,8 @@ padding: 6px;
   </action>
   <action name="actionDescription">
    <property name="icon">
-    <iconset resource="../resources/resources.qrc">
-     <normaloff>:/icons/project.png</normaloff>:/icons/project.png</iconset>
+    <iconset>
+     <normaloff>../resources/icons/project.png</normaloff>../resources/icons/project.png</iconset>
    </property>
    <property name="text">
     <string>Project Description</string>
@@ -377,8 +377,8 @@ padding: 6px;
   </action>
   <action name="actionMaterialSpecs">
    <property name="icon">
-    <iconset resource="../resources/resources.qrc">
-     <normaloff>:/icons/mat_specs.png</normaloff>:/icons/mat_specs.png</iconset>
+    <iconset>
+     <normaloff>../resources/icons/mat_specs.png</normaloff>../resources/icons/mat_specs.png</iconset>
    </property>
    <property name="text">
     <string>Material Specification</string>

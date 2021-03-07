@@ -64,7 +64,8 @@ class LoadDialog(QDialog):
             return False
 
     def readExcel(self):
-        user_dir = str(Path.home())
+        # user_dir = str(Path.home())
+        user_dir = str(Path.cwd()) + '/template'
         fileObj = QFileDialog.getOpenFileName(self, "Connection Design", user_dir, filter="Excel files (*.xlsx)")
         path = fileObj[0]
         if path != "":
