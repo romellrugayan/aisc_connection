@@ -10,8 +10,7 @@ from shearcopedialog import ShearCopeDialog
 from shearclipdialog import ShearClipDialog
 from shearendplatedialog import ShearEndPlateDialog
 from loaddialog import LoadDialog
-from utility.xmlwriter import XMLWriter
-from utility.xmlreader import XMLReader
+from utility.json import WriteJson, ReadJson
 from utility.viewer import Viewer
 from utility.detailer import Detailer
 from utility.statusinfo import StatusInfo
@@ -66,16 +65,16 @@ class Window(QMainWindow):
     def openFileDialog(self):
         # user_dir = str(Path.home())
         user_dir = str(Path.cwd()) + '/template'
-        fileObj = QFileDialog.getOpenFileName(self, self.app_name, user_dir, filter="XML files (*.xml)")
+        fileObj = QFileDialog.getOpenFileName(self, self.app_name, user_dir, filter="Text files (*.txt)")
         self.file_path = fileObj[0]
         if self.file_path != "":
-            xml_reader = XMLReader(self.file_path)
-            xml_reader.readProjectDesc(self.project_desc)
-            self.mat_specs = xml_reader.readMaterial()
+            jr = ReadJson(self.file_path)
+            jr.projectDesc(self.project_desc)
+            self.mat_specs = jr.material()
             self.text_info.clear()
             self.textEdit.clear()
             conn_geometry = {}
-            self.conn_type = xml_reader.readConnGeometry(conn_geometry)
+            self.conn_type = jr.connGeometry(conn_geometry)
 
             if self.conn_type == 'ShearGusset':
                 self.gusset_geometry = conn_geometry
@@ -99,7 +98,7 @@ class Window(QMainWindow):
                 self.openShearClipDialog()
 
             self.load_data = []
-            xml_reader.readLoads(self.load_data)
+            jr.loadings(self.load_data)
             self.isProjectDescUpdated = True
             self.isMaterialUpdated = True
             self.isSaved = True
@@ -107,8 +106,9 @@ class Window(QMainWindow):
 
     def saveFileDialog(self):
         if not self.isSaved:
-            user_dir = str(Path.home())
-            fileObj = QFileDialog.getSaveFileName(self, self.app_name, user_dir, filter="XML files (*.xml)")
+            # user_dir = str(Path.home())
+            user_dir = str(Path.cwd()) + '/template'
+            fileObj = QFileDialog.getSaveFileName(self, self.app_name, user_dir, filter="Text files (*.txt)")
             self.file_path = fileObj[0]
             if self.conn_type == 'ShearGusset':
                 conn_geometry = self.gusset_geometry
@@ -118,12 +118,12 @@ class Window(QMainWindow):
                 conn_geometry = self.clip_geometry
             if self.file_path != "":
                 if conn_geometry != "" and self.load_data != "":
-                    xml_writer = XMLWriter()
-                    xml_writer.projectDesc(self.project_desc)
-                    xml_writer.material(self.mat_specs)
-                    xml_writer.connGeometry(self.conn_type, conn_geometry)
-                    xml_writer.loadings(self.load_data)
-                    xml_writer.saveXMLFile(self.file_path)
+                    wj = WriteJson(self.file_path)
+                    wj.projectDesc(self.project_desc)
+                    wj.material(self.mat_specs)
+                    wj.connGeometry(self.conn_type, conn_geometry)
+                    wj.loadings(self.load_data)
+                    wj.dumpJson()
                     self.isSaved = True
         else:
             if self.conn_type == 'ShearGusset':
@@ -133,16 +133,17 @@ class Window(QMainWindow):
             elif self.conn_type == 'ShearClip':
                 conn_geometry = self.clip_geometry
             if conn_geometry != "" and self.load_data != "":
-                xml_writer = XMLWriter()
-                xml_writer.projectDesc(self.project_desc)
-                xml_writer.material(self.mat_specs)
-                xml_writer.connGeometry(self.conn_type, conn_geometry)
-                xml_writer.loadings(self.load_data)
-                xml_writer.saveXMLFile(self.file_path)
+                wj = WriteJson(self.file_path)
+                wj.projectDesc(self.project_desc)
+                wj.material(self.mat_specs)
+                wj.connGeometry(self.conn_type, conn_geometry)
+                wj.loadings(self.load_data)
+                wj.dumpJson()
 
     def saveFileAsDialog(self):
-        user_dir = str(Path.home())
-        fileObj = QFileDialog.getSaveFileName(self, self.app_name, user_dir, filter="XML files (*.xml)")
+        # user_dir = str(Path.home())
+        user_dir = str(Path.cwd()) + '/template'
+        fileObj = QFileDialog.getSaveFileName(self, self.app_name, user_dir, filter="Text files (*.txt)")
         self.file_path = fileObj[0]
         if self.conn_type == 'ShearGusset':
             conn_geometry = self.gusset_geometry
@@ -152,12 +153,12 @@ class Window(QMainWindow):
             conn_geometry = self.clip_geometry
         if self.file_path != "":
             if conn_geometry != "" and self.load_data != "":
-                xml_writer = XMLWriter()
-                xml_writer.projectDesc(self.project_desc)
-                xml_writer.material(self.mat_specs)
-                xml_writer.connGeometry(self.conn_type, conn_geometry)
-                xml_writer.loadings(self.load_data)
-                xml_writer.saveXMLFile(self.file_path)
+                wj = WriteJson(self.file_path)
+                wj.projectDesc(self.project_desc)
+                wj.material(self.mat_specs)
+                wj.connGeometry(self.conn_type, conn_geometry)
+                wj.loadings(self.load_data)
+                wj.dumpJson()
                 self.isSaved = True
 
     def openProjectDialog(self):
