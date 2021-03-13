@@ -4,6 +4,9 @@ from PyQt5.uic import loadUi
 
 
 class ProjectDialog(QDialog):
+    """
+    Set and save project information
+    """
     def __init__(self):
         super(ProjectDialog, self).__init__()
         loadUi('ui/projectdesc.ui', self)
@@ -11,6 +14,9 @@ class ProjectDialog(QDialog):
         self.project_desc = {}
 
     def setProjectDesc(self, project_desc):
+        """
+        Write the previously saved project information in dialog widget
+        """
         self.job_no_edit.setText(project_desc['job_no'])
         self.project_symbol_edit.setText(project_desc['project_symbol'])
         self.project_title_edit.setText(project_desc['project_title'])
@@ -20,6 +26,9 @@ class ProjectDialog(QDialog):
         self.rev_edit.setText(project_desc['rev'])
 
     def getProjectDesc(self):
+        """
+        Get the user's input for the project information and save the data to dictionary
+        """
         self.project_desc['job_no'] = self.job_no_edit.text()
         self.project_desc['project_symbol'] = self.project_symbol_edit.text()
         self.project_desc['project_title'] = self.project_title_edit.text()

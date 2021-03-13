@@ -5,6 +5,10 @@ import sqlite3
 
 
 class DesignResult:
+    """
+    Calculate the provided capacity of the connection based on the material strength, connection type,
+    connection geometry and loadings.
+    """
     def __init__(self, material, conn_type, conn_geometry):
         # connection type
         self.conn_type = conn_type
@@ -67,6 +71,9 @@ class DesignResult:
         self.web_height = self.calculateWebHeight()
 
     def calcEccentricity(self):
+        """
+        Calculate the eccentricity of the applied force based on connection type and supporting member
+        """
         if self.conn_type == 'ShearGusset':
             if self.support == 'Beam' or self.support == 'Column Web':
                 if self.col == 1:
@@ -85,6 +92,9 @@ class DesignResult:
         return round(ecc, 2)
 
     def check_bolt_shear(self, load_data):
+        """
+        Check the bolt shear strength
+        """
         Fx = float(load_data[3])
         Fy = float(load_data[4])
         bolt_shear = round(self.bolt_shear.calculateBoltShear(Fx, Fy, self.ecc), 1)
@@ -93,6 +103,9 @@ class DesignResult:
         return bolt_shear, bolt_shear_cap, stress_ratio
 
     def check_bolt_bearing(self, load_data):
+        """
+        Check the bearing strength of the plate on bolt holes
+        """
         Fx = float(load_data[3])
         Fy = float(load_data[4])
         bolt_bearing = round(self.bolt_shear.calculateBoltShear(Fx, Fy, self.ecc), 1)
@@ -103,6 +116,9 @@ class DesignResult:
         return bolt_bearing, bolt_bearing_cap, stress_ratio
 
     def check_plate_block_shear(self, load_data):
+        """
+        Check the block shear strength of the plate
+        """
         block_shear = float(load_data[4])
         shear_gross_area = self.tg * self.H
         shear_net_area = self.tg * (self.H - self.ev -
@@ -113,6 +129,9 @@ class DesignResult:
         return block_shear, block_shear_cap, stress_ratio
 
     def check_plate_shear_yielding(self, load_data):
+        """
+        Check the shear yielding of the plate
+        """
         plate_shear_yielding = float(load_data[4])
         gross_area = self.tg * self.H
         plate_shear_yielding_cap = round(self.ms.plate_shear_yielding(gross_area), 1)
@@ -120,6 +139,9 @@ class DesignResult:
         return plate_shear_yielding, plate_shear_yielding_cap, stress_ratio
 
     def check_plate_shear_rupture(self, load_data):
+        """
+        Check the shear rupture of the plate
+        """
         plate_shear_rupture = float(load_data[4])
         net_area = self.tg * (self.H - self.nos * (self.dia + 1 / 16))
         plate_shear_rupture_cap = round(self.ms.plate_shear_rupture(net_area), 1)
@@ -127,6 +149,9 @@ class DesignResult:
         return plate_shear_rupture, plate_shear_rupture_cap, stress_ratio
 
     def check_plate_tensile_yielding(self, load_data):
+        """
+        Check the tensile yielding of the plate
+        """
         plate_tensile_yielding = float(load_data[3])
         gross_area = self.tg * self.H
         plate_tensile_yielding_cap = round(self.ms.plate_tensile_yielding(gross_area), 1)
@@ -134,6 +159,9 @@ class DesignResult:
         return plate_tensile_yielding, plate_tensile_yielding_cap, stress_ratio
 
     def check_plate_tensile_rupture(self, load_data):
+        """
+        Check the tensile rupture of the plate
+        """
         plate_tensile_rupture = float(load_data[3])
         effective_net_area = self.tg * (self.H - self.nos * (self.dia + 1 / 16))
         plate_tensile_rupture_cap = round(self.ms.plate_tensile_rupture(effective_net_area), 1)
@@ -141,6 +169,9 @@ class DesignResult:
         return plate_tensile_rupture, plate_tensile_rupture_cap, stress_ratio
 
     def check_plate_bending_in(self, load_data):
+        """
+        Check the in-plane bending strength of the plate
+        """
         plate_bending_inplane = round(float(load_data[4]) * self.ecc, 1)
         plastic_modulus = self.tg * self.H ** 2 / 4
         plate_bending_cap = round(self.ms.plate_bending_strength(plastic_modulus), 1)
@@ -148,6 +179,9 @@ class DesignResult:
         return plate_bending_inplane, plate_bending_cap, stress_ratio
 
     def check_plate_bending_out(self, load_data):
+        """
+        Check the out-of-plane bending strength of the plate
+        """
         plate_bending_outplane = round(float(load_data[5]) * self.ecc, 1)
         plastic_modulus = self.H * self.tg ** 2 / 4
         plate_bending_cap = round(self.ms.plate_bending_strength(plastic_modulus), 1)
@@ -155,6 +189,9 @@ class DesignResult:
         return plate_bending_outplane, plate_bending_cap, stress_ratio
 
     def check_welding_shear(self, load_data):
+        """
+        Check the weld shear strength
+        """
         welding_shear_unit = round(math.sqrt(float(load_data[3]) ** 2 + float(load_data[4]) ** 2) /
                                    (2 * self.weld_length), 2)
         angle = 90
@@ -166,6 +203,9 @@ class DesignResult:
 
     # for cope type connection
     def calculateWebHeight(self):
+        """
+        Calculate the height of the web for cope type connection (single-coped or double-coped)
+        """
         if self.d <= (self.d2 - self.c):
             webH = self.d - self.c
         else:

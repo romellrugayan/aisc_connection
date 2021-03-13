@@ -5,6 +5,9 @@ import sqlite3
 
 
 class ShearGussetDialog(QDialog):
+    """
+    User interface for Shear Connection of Gusset Plate Type.
+    """
 
     def __init__(self, isGussetUpdated, gusset_geometry):
         super(ShearGussetDialog, self).__init__()
@@ -44,6 +47,9 @@ class ShearGussetDialog(QDialog):
             self.support_combo.addItem(size[0])
 
     def showMemberProperties(self):
+        """
+        Showing the saved connection geometry properties or retrieve the data from database
+        """
         if not self.isGussetUpdated:
             self.main_combo.setEditable(False)
             self.support_combo.setEditable(False)
@@ -113,6 +119,9 @@ class ShearGussetDialog(QDialog):
             self.support_rad_button3.setChecked(True)
 
     def validateInput(self):
+        """
+        Validate if the user's input is valid numeric value
+        """
         try:
             dia = float(self.dia_edit.text())
             nos = int(self.nos_edit.text())
@@ -130,6 +139,9 @@ class ShearGussetDialog(QDialog):
             return False
 
     def nonZeroValues(self):
+        """
+        Validate if the user's input is non-zero or not negative value.
+        """
         if float(self.dia_edit.text()) == 0 or float(self.dia_edit.text()) < 0:
             QMessageBox.critical(self, "Connection Design", "Zero or negative value is invalid. Parameters not saved!")
             return False
@@ -163,6 +175,10 @@ class ShearGussetDialog(QDialog):
         return True
 
     def getConnGeometry(self):
+        """
+        Retrieve the value from the input widgets and save to dictionary. This method should be called after
+        both methods; validateInput() and nonZeroValues() return True.
+        """
         geometry = dict(size=self.main_combo.currentText(), dia=self.dia_edit.text(), nos=self.nos_edit.text(),
                         col=self.col_edit.text(), spacing=self.spacing_edit.text(), weld=self.weld_edit.text(),
                         ev=self.ev_edit.text(), eh=self.eh_edit.text(), tg=self.tg_edit.text(),

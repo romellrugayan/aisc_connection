@@ -6,6 +6,9 @@ from pathlib import Path
 
 
 class LoadDialog(QDialog):
+    """
+    Collect user's input for loadings. It can be loaded from external excel file.
+    """
     def __init__(self):
         super(LoadDialog, self).__init__()
         loadUi("ui/load.ui", self)
@@ -26,6 +29,10 @@ class LoadDialog(QDialog):
         self.excel_button.clicked.connect(self.readExcel)
 
     def getRows(self):
+        """
+        Check if there's a blank input on first column (Member No.) of TableWidget. If encounter blank row entry, the
+        succeeding rows will be ignored. Thus, only rows above the blank row shall be counted for the no. of loadings.
+        """
         k = 0
         for row in range(0, 6):
             item = QTableWidgetItem.text(self.tableWidget.item(row, 0))
@@ -36,6 +43,9 @@ class LoadDialog(QDialog):
         return k
 
     def setLoads(self):
+        """
+        This method will initialize the TableWidget items (cell value)
+        """
         for row in range(0, self.row):
             for col in range(0, 3):
                 self.tableWidget.setItem(row, col, QTableWidgetItem(""))
@@ -43,6 +53,9 @@ class LoadDialog(QDialog):
                 self.tableWidget.setItem(row, col, QTableWidgetItem("0.0"))
 
     def getLoads(self, k):
+        """
+        Retrieve the values from the cells and save to list.
+        """
         data = []
         for row in range(0, k):
             item = []
@@ -52,6 +65,9 @@ class LoadDialog(QDialog):
         return data
 
     def validateInput(self, k):
+        """
+        Validate if the user's input is valid numeric values.
+        """
         try:
             for row in range(0, k):
                 for col in range(0, 3):
@@ -64,6 +80,9 @@ class LoadDialog(QDialog):
             return False
 
     def readExcel(self):
+        """
+        Read excel file and load into cells of TableWidget.
+        """
         # user_dir = str(Path.home())
         user_dir = str(Path.cwd()) + '/template'
         fileObj = QFileDialog.getOpenFileName(self, "Connection Design", user_dir, filter="Excel files (*.xlsx)")
