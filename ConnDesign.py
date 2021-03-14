@@ -17,6 +17,7 @@ from utility.statusinfo import StatusInfo
 from designresult import DesignResult
 
 
+
 class Window(QMainWindow):
     def __init__(self):
         super(Window, self).__init__()
@@ -81,28 +82,27 @@ class Window(QMainWindow):
                 self.isGussetUpdated = True
                 self.drawConnGeometry(self.gusset_geometry)
                 self.displayInfo(self.gusset_geometry)
-                self.openShearGussetDialog()
+                # self.openShearGussetDialog()
 
             elif self.conn_type == 'ShearCope':
                 self.cope_geometry = conn_geometry
                 self.isCopeUpdated = True
                 self.drawConnGeometry(self.cope_geometry)
                 self.displayInfo(self.cope_geometry)
-                self.openShearCopeDialog()
+                # self.openShearCopeDialog()
 
             elif self.conn_type == 'ShearClip':
                 self.clip_geometry = conn_geometry
                 self.isClipUpdated = True
                 self.drawConnGeometry(self.clip_geometry)
                 self.displayInfo(self.clip_geometry)
-                self.openShearClipDialog()
+                # self.openShearClipDialog()
 
             self.load_data = []
             jr.loadings(self.load_data)
             self.isProjectDescUpdated = True
             self.isMaterialUpdated = True
             self.isSaved = True
-
 
     def saveFileDialog(self):
         if not self.isSaved:

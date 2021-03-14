@@ -12,21 +12,21 @@
     "weld": "E70XX"
   },
   "conn_type": "ShearGusset",
-  "member": "W18X65",
+  "member": "W16X77",
   "geometry": {
     "dia": "0.75",
-    "nos": "6",
+    "nos": "5",
     "col": "1",
     "spacing": "2.375",
     "weld": "0.25",
     "ev": "1.625",
     "eh": "1.5",
     "tg": "0.5",
-    "H": "15.125",
-    "c": "1.5"
+    "H": "12.75",
+    "c": "1.625"
   },
   "support": {
-    "supporting_member": "W14X90",
+    "supporting_member": "W12X65",
     "support_type": "Column Flange"
   },
   "loads": [
